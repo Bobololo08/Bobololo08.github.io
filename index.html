@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Welcome to Bobololo08's Website</title>
+  <meta charset="UTF-8" />
+  <title>Mini Browser</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #browser-frame { width: 100%; height: 600px; border: 1px solid #ccc; margin-top: 10px; }
+    input[type="text"] { width: 70%; padding: 8px; }
+    button { padding: 8px 12px; }
+  </style>
 </head>
 <body>
-  <h1>Hello from Bobololo08!</h1>
-  <p>This is my GitHub Pages website.</p>
+  <h1>Mini Browser</h1>
+  <form id="browser-form">
+    <input type="text" id="url-input" placeholder="Enter URL or search query" required />
+    <button type="submit">Go</button>
+  </form>
+
+  <iframe id="browser-frame" src="https://www.google.com"></iframe>
+
+  <script>
+    const form = document.getElementById('browser-form');
+    const input = document.getElementById('url-input');
+    const iframe = document.getElementById('browser-frame');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let val = input.value.trim();
+
+      // Check if input looks like a URL (simple check)
+      if (!val.startsWith('http://') && !val.startsWith('https://')) {
+        // If not, treat input as Google search query
+        val = 'https://www.google.com/search?q=' + encodeURIComponent(val);
+      }
+
+      iframe.src = val;
+    });
+  </script>
 </body>
-</html
+</html>
